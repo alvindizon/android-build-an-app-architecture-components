@@ -15,6 +15,7 @@
  */
 package com.example.android.sunshine.ui.detail;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,8 @@ public class DetailActivity extends AppCompatActivity {
      */
     private ActivityDetailBinding mDetailBinding;
 
+    private DetailActivityViewModel mViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,15 @@ public class DetailActivity extends AppCompatActivity {
         mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
         Date date = new Date(timestamp);
+
+        // set LifecyleOwner for view model, thus establishing connection between the two
+        mViewModel = ViewModelProviders.of(this).get(DetailActivityViewModel.class);
+
+        // observe LiveData in view model.
+        // If the ViewModel's setWeather method is called, the UI is updated.
+        mViewModel.getWeather().observe(this, weatherEntry -> {
+            if(weatherEntry != null) bindWeatherToUI(weatherEntry);
+        });
 
     }
 
