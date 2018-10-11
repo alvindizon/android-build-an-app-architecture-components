@@ -25,4 +25,13 @@ public interface WeatherDao {
      */
     @Query("SELECT * FROM weather WHERE date = :date")
     LiveData<WeatherEntry> getWeatherByDate(Date date);
+
+    /**
+     * Returns the number of weather forecasts with dates
+     * that occur after the specified data, inclusive
+     * @param date
+     * @return
+     */
+    @Query("SELECT COUNT(id) FROM weather WHERE date >= :date")
+    int countAllFutureWeather(Date date);
 }
