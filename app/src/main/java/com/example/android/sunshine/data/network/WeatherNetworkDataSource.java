@@ -175,8 +175,9 @@ public class WeatherNetworkDataSource {
                             response.getWeatherForecast()[0].getMin(),
                             response.getWeatherForecast()[0].getMax()));
 
-                    // TODO Finish this method when instructed.
-                    // Will eventually do something with the downloaded data
+                    // update the value held in mDownloadedWeatherForecasts with the new forecasts
+                    // use postvalue() since the call will be done off of the main thread.
+                    mDownloadedWeatherForecasts.postValue(response.getWeatherForecast());
                 }
             } catch (Exception e) {
                 // Server probably invalid
