@@ -31,7 +31,7 @@ import java.util.Date;
 public class DetailActivityViewModel extends ViewModel {
 
     // Weather forecast the user is looking at
-    private MutableLiveData<WeatherEntry> mWeather;
+    private LiveData<WeatherEntry> mWeather;
 
     private final Date mDate;
     private final SunshineRepository mRepository;
@@ -39,18 +39,10 @@ public class DetailActivityViewModel extends ViewModel {
     public DetailActivityViewModel(SunshineRepository repository, Date date) {
         mRepository = repository;
         mDate = date;
-        mWeather = new MutableLiveData<>();
+        mWeather = mRepository.getWeatherByDate(mDate);
     }
 
-    public MutableLiveData<WeatherEntry> getWeather() {
+    public LiveData<WeatherEntry> getWeather() {
         return mWeather;
-    }
-
-    /**
-     * postValue will trigger all observers observing LiveData
-     * In our app, there is one observer in DetailActivity
-     */
-    public void setWeather(WeatherEntry weatherEntry) {
-        mWeather.postValue(weatherEntry);
     }
 }
