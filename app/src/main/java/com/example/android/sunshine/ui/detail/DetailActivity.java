@@ -83,7 +83,7 @@ public class DetailActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
+        InjectorUtils.provideRepository(this).initializeData();
     }
 
     private void bindWeatherToUI(WeatherEntry weatherEntry) {
