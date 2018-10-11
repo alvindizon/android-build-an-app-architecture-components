@@ -20,6 +20,7 @@ import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
 import com.example.android.sunshine.AppExecutors;
+import com.example.android.sunshine.data.database.ListViewWeatherEntry;
 import com.example.android.sunshine.data.database.WeatherDao;
 import com.example.android.sunshine.data.database.WeatherEntry;
 import com.example.android.sunshine.data.network.WeatherNetworkDataSource;
@@ -145,7 +146,7 @@ public class SunshineRepository {
      * and returns that data to the MainActivityViewModel
      * @return
      */
-    public LiveData<List<WeatherEntry>> getLatestWeatherForecasts() {
+    public LiveData<List<ListViewWeatherEntry>> getLatestWeatherForecasts() {
         initializeData();
         return mWeatherDao.getWeatherAfterDate(SunshineDateUtils.getNormalizedUtcDateForToday());
     }

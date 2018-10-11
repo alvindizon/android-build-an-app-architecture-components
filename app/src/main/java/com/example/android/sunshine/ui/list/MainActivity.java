@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements
         mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel.class);
 
 
-        mViewModel.getmWeatherEntryList().observe(this, forecasts -> {
+        mViewModel.getWeatherEntryList().observe(this, forecasts -> {
             mForecastAdapter.swapForecast(forecasts);
             if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
             mRecyclerView.smoothScrollToPosition(mPosition);

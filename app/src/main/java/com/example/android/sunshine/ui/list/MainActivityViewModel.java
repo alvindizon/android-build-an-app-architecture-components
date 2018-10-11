@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.android.sunshine.data.SunshineRepository;
+import com.example.android.sunshine.data.database.ListViewWeatherEntry;
 import com.example.android.sunshine.data.database.WeatherEntry;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class MainActivityViewModel extends ViewModel {
 
-    private LiveData<List<WeatherEntry>> mWeatherEntryList;
+    private LiveData<List<ListViewWeatherEntry>> mWeatherEntryList;
     private final SunshineRepository mRepository;
 
     public MainActivityViewModel(SunshineRepository mRepository) {
@@ -21,7 +22,7 @@ public class MainActivityViewModel extends ViewModel {
         mWeatherEntryList = mRepository.getLatestWeatherForecasts();
     }
 
-    public LiveData<List<WeatherEntry>> getmWeatherEntryList(){
+    public LiveData<List<ListViewWeatherEntry>> getWeatherEntryList(){
         return mWeatherEntryList;
     }
 }
