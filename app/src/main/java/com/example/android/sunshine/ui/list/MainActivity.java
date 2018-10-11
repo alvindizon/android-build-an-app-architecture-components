@@ -103,11 +103,21 @@ public class MainActivity extends AppCompatActivity implements
 
         /* Setting the adapter attaches it to the RecyclerView in our layout. */
         mRecyclerView.setAdapter(mForecastAdapter);
-        showLoading();
 
         MainViewModelFactory factory = InjectorUtils.provideMainActivityViewModelFactory(
                 this.getApplicationContext());
         mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel.class);
+
+
+        mViewModel.getmWeatherEntryList().observe(this, forecasts -> {
+            mForecastAdapter.swapForecast(forecasts);
+            if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
+            mRecyclerView.smoothScrollToPosition(mPosition);
+            // Show the weather list or the loading screen based on whether the forecast data exists
+            // and is loaded
+            if (forecasts != null && forecasts.size() != 0) showWeatherDataView();
+            else showLoading();
+        });
     }
 
     /**

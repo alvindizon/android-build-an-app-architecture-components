@@ -54,8 +54,8 @@ public class DetailActivity extends AppCompatActivity {
 
         mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
-        // get today's date
-        Date date = SunshineDateUtils.getNormalizedUtcDateForToday();
+        // get date from selected item MainActivity list
+        Date date = new Date(timestamp);
 
         // Get the ViewModel from Factory
         DetailViewModelFactory factory = InjectorUtils.provideDetailViewModelFactory(
